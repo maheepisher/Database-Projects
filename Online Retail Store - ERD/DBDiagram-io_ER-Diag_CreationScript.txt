@@ -1,0 +1,56 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table customers{
+customerID varchar [primary key]
+name varchar
+emailid varchar
+address varchar
+
+}
+
+
+Table Products{
+  product_ID varchar [primary key]
+  product_name varchar
+  product_category varchar
+  description varchar
+  price decimal
+
+}
+
+
+table Orders{
+  order_ID varchar [primary key]
+customerID varchar
+order_date date
+product_id varchar
+order_quantity int
+total_amount decimal
+
+}
+
+
+table Inventory{
+product_id varchar [primary key]
+stock_quantity int
+
+}
+
+
+table Reviews{
+review_ID varchar [primary key]
+product_id varchar
+customerID varchar
+Rating int
+Review varchar
+Review_date date
+
+}
+
+
+Ref: Orders.customerID > customers.customerID // many-to-one
+Ref: Orders.product_id <> Products.product_ID
+Ref: Inventory.product_id - Products.product_ID
+Ref: Reviews.customerID > customers.customerID
+Ref: Reviews.product_id > Products.product_ID
