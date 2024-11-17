@@ -1,0 +1,103 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Member{
+MemberID INT [primary key]
+Name varchar
+Email varchar
+Address varchar
+Phone varchar
+}
+
+
+Table MembershipType{
+  MembershipTypeID INT [primary key]
+  TypeName varchar
+  Benefits text
+  
+
+}
+
+table MemberMembership{
+MemberID INT [primary key]
+MembershipTypeID INT [primary key]
+
+}
+
+table Book{
+BookID INT [primary key]
+Title varchar
+ISBN_Code varchar
+PublicationYear year
+GenreID INT
+
+}
+
+
+table Magazine{
+MagazineID INT [primary key]
+Title varchar
+IssueNumber INT
+PublicationDate date
+GenreID int
+
+}
+
+
+table Genre{
+GenreID INT [primary key]
+GenreName varchar
+
+}
+
+table Author{
+AuthorID INT [primary key]
+FirstName varchar
+LastName varchar
+Biography varchar
+
+
+}
+
+table Reservation{
+ReservationID INT [primary key]
+MemberID INT
+ItemID INT
+ReservationDate date
+
+}
+
+table Checkout{
+CheckoutID INT [primary key]
+MemberID INT
+ItemID INT
+CheckoutDate date
+DueDate Date
+
+}
+
+table Item{
+ItemID INT [primary key]
+Title varchar
+Type varchar
+GenreID INT
+
+}
+
+table BookAuthor{
+BookID INT
+AuthorID INT
+
+}
+
+Ref: MemberMembership.MemberID > Member.MemberID // many-to-one
+Ref: MemberMembership.MembershipTypeID > MembershipType.MembershipTypeID
+Ref: Item.GenreID > Genre.GenreID
+Ref: Book.GenreID > Genre.GenreID
+Ref: Magazine.GenreID > Genre.GenreID
+Ref: BookAuthor.BookID <> Book.BookID
+Ref: BookAuthor.AuthorID <> Author.AuthorID
+Ref: Reservation.MemberID > Member.MemberID
+Ref: Reservation.ItemID > Item.ItemID
+Ref: Checkout.MemberID > Member.MemberID
+Ref: Checkout.ItemID > Item.ItemID

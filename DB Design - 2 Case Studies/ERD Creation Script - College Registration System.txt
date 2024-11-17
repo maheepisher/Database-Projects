@@ -1,0 +1,104 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Student{
+StudentID INT [primary key]
+FirstName varchar
+LastName varchar
+Email varchar
+Phone varchar
+MajorID int
+MinorID int
+}
+
+
+Table Professor{
+ProfessorID INT [primary key]
+FirstName varchar
+LastName varchar
+Email varchar
+Phone varchar
+DepartmentID int
+}
+
+Table Course{
+  CourseID INT [primary key]
+  CourseName varchar
+  CourseCode varchar
+  DepartmentID INT
+}
+
+table Department{
+DepartmentID INT [primary key]
+DepartmentName varchar
+
+}
+
+table Enrollment{
+EnrollmentID INT [primary key]
+StudentID int
+CourseID INT
+EnrollmentDate date
+
+}
+
+
+table Prerequisite{
+CourseID INT [primary key]
+PrerequisiteCourseID INT [primary key]
+
+}
+
+
+table CourseOffering{
+OfferingID INT [primary key]
+CourseID int
+ProfessorID int
+Semester varchar
+Year year
+
+}
+
+table Major{
+MajorID INT [primary key]
+MajorName varchar
+DepartmentID int
+
+}
+
+
+table Minor{
+MinorID INT [primary key]
+MinorName varchar
+DepartmentID int
+
+}
+
+Ref: Student.MajorID > Major.MajorID
+Ref: Student.MinorID > Minor.MinorID
+Ref: Professor.DepartmentID > Department.DepartmentID
+Ref: Course.DepartmentID > Department.DepartmentID
+Ref: Enrollment.StudentID > Student.StudentID
+Ref: Enrollment.CourseID > Course.CourseID
+Ref: Prerequisite.CourseID > Course.CourseID
+Ref: Prerequisite.PrerequisiteCourseID > Course.CourseID
+Ref: CourseOffering.CourseID > Course.CourseID
+Ref: CourseOffering.ProfessorID > Professor.ProfessorID
+Ref: Major.DepartmentID > Department.DepartmentID
+Ref: Minor.DepartmentID > Department.DepartmentID
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
